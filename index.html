@@ -12,6 +12,7 @@
             --dourado: #d4af37;
             --dourado-claro: #f1d592;
             --cinza-escuro: #1a1a1a;
+            --branco: #ffffff;
         }
 
         body {
@@ -23,38 +24,54 @@
             line-height: 1.6;
         }
 
-        /* Header e Navegação */
+        /* --- Header e Navegação (ATUALIZADO) --- */
         header {
             border-bottom: 1px solid var(--dourado);
-            padding: 30px 20px;
+            padding: 20px;
             text-align: center;
             position: sticky;
             top: 0;
-            background: rgba(10, 10, 10, 0.95);
+            background: rgba(10, 10, 10, 0.98);
             z-index: 100;
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Centraliza tudo horizontalmente */
+        }
+
+        /* Área do Logo */
+        .logo-container {
+            margin-bottom: 10px; /* Espaço entre logo e nome */
+        }
+
+        .logo-empresa {
+            max-height: 80px; /* Ajuste a altura máxima do seu logo aqui */
+            width: auto;      /* Mantém a proporção */
+            display: block;
         }
 
         h1 { 
             margin: 0; 
             letter-spacing: 4px; 
             text-transform: uppercase;
-            font-size: 2.5rem;
+            font-size: 2rem;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            color: var(--dourado);
         }
 
-        nav { margin-top: 20px; }
+        nav { margin-top: 15px; display: flex; flex-wrap: wrap; justify-content: center; }
 
         .nav-btn {
             background: transparent;
             border: 1px solid var(--dourado);
             color: var(--dourado);
-            padding: 10px 25px;
+            padding: 8px 20px;
             cursor: pointer;
             transition: all 0.3s ease;
             margin: 5px;
             font-weight: bold;
             text-transform: uppercase;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
         }
 
         .nav-btn:hover {
@@ -63,30 +80,30 @@
             box-shadow: 0 0 10px var(--dourado);
         }
 
-        /* Seções de Informação */
-        .container { padding: 40px 20px; max-width: 1200px; margin: auto; min-height: 70vh; }
+        /* --- Seções de Informação --- */
+        .container { padding: 30px 15px; max-width: 1200px; margin: auto; min-height: 70vh; }
         
         .info-box {
             display: none;
-            padding: 30px;
+            padding: 25px;
             border: 1px solid var(--dourado);
             margin-bottom: 30px;
             text-align: center;
             background: var(--cinza-escuro);
             animation: fadeIn 0.5s ease;
+            border-radius: 8px;
         }
 
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* Grid de Produtos */
+        /* --- Grid de Produtos --- */
         .grid-produtos {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
+            gap: 25px;
+            margin-top: 30px;
         }
 
-        /* Card de Produto - Só aparece se tiver conteúdo */
         .card-produto {
             background: var(--cinza-escuro);
             border: 1px solid #333;
@@ -100,7 +117,7 @@
         }
 
         .card-produto:hover {
-            transform: translateY(-10px);
+            transform: translateY(-5px);
             border-color: var(--dourado);
         }
 
@@ -111,81 +128,109 @@
             border-bottom: 1px solid #333;
         }
 
-        .card-info { padding: 20px; flex-grow: 1; }
+        .card-info { padding: 15px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between;}
         
-        .card-info h3 { margin: 10px 0; font-size: 1.4rem; }
+        .card-info h3 { margin: 5px 0; font-size: 1.3rem; color: var(--branco); }
+        .card-info p { font-size: 0.9rem; color: #aaa; margin: 5px 0 10px 0; }
         
         .preco { 
             font-weight: bold; 
-            font-size: 1.5rem; 
+            font-size: 1.4rem; 
             display: block; 
-            margin: 15px 0; 
-            color: #fff;
+            margin: 10px 0; 
+            color: var(--dourado-claro);
         }
 
         .btn-carrinho {
             background: linear-gradient(45deg, var(--dourado), var(--dourado-claro));
             color: var(--preto);
             border: none;
-            padding: 15px;
+            padding: 12px;
             width: 100%;
             cursor: pointer;
             font-weight: bold;
             text-transform: uppercase;
             transition: 0.3s;
+            border-radius: 6px;
+            font-size: 0.85rem;
         }
 
-        .btn-carrinho:hover { filter: brightness(1.2); }
+        .btn-carrinho:hover { filter: brightness(1.1); transform: scale(1.02); }
 
-        /* Carrinho Lateral Flutuante */
+        /* --- Carrinho Lateral Flutuante --- */
         #carrinho-secao {
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background: #000;
+            background: rgba(0, 0, 0, 0.95);
             border: 2px solid var(--dourado);
-            padding: 20px;
-            width: 320px;
-            max-height: 500px;
+            padding: 15px;
+            width: 300px;
+            max-height: 80vh;
             overflow-y: auto;
             box-shadow: 0 10px 30px rgba(0,0,0,0.8);
-            border-radius: 15px;
+            border-radius: 12px;
             z-index: 1000;
+            display: none; /* Escondido inicialmente, aparece quando tem item */
         }
+
+        #carrinho-secao h3 { margin-top: 0; color: var(--branco); border-bottom: 1px solid var(--dourado); padding-bottom: 10px;}
 
         #itens-carrinho li {
             border-bottom: 1px solid #333;
-            padding: 10px 0;
+            padding: 8px 0;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            color: #eee;
+        }
+
+        .carrinho-total {
+            margin-top: 15px;
+            padding-top: 10px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: var(--branco);
             display: flex;
             justify-content: space-between;
         }
 
-        /* Selo e Rodapé */
+        /* --- Selo e Rodapé --- */
         footer {
             text-align: center;
-            padding: 60px 20px;
+            padding: 40px 20px;
             background: #050505;
+            margin-top: auto;
         }
 
         .selo { 
             border: 1px solid var(--dourado); 
-            padding: 10px 20px; 
+            padding: 8px 15px; 
             display: inline-block; 
             letter-spacing: 1px;
             font-weight: bold;
+            font-size: 0.8rem;
         }
 
-        /* Responsividade para Celular */
+        /* --- Responsividade --- */
         @media (max-width: 600px) {
-            #carrinho-secao { width: 90%; right: 5%; }
-            h1 { font-size: 1.8rem; }
+            header { padding: 15px; }
+            .logo-empresa { max-height: 60px; }
+            h1 { font-size: 1.5rem; letter-spacing: 2px; }
+            #carrinho-secao { width: 85%; right: 5%; bottom: 10px; }
+            .grid-produtos { grid-template-columns: 1fr; } /* Uma coluna no mobile */
         }
     </style>
 </head>
 <body>
 
 <header>
+    <div class="logo-container">
+        <img src="logotipo.jpg" alt="Logo Muquilas Fashion" class="logo-empresa">
+    </div>
+
     <h1>Muquilas Fashion</h1>
+
     <nav>
         <button class="nav-btn" onclick="toggleSecao('quem-somos')">Quem Somos</button>
         <button class="nav-btn" onclick="toggleSecao('contato')">Contacto</button>
@@ -200,47 +245,58 @@
 
     <div id="contato" class="info-box">
         <h3>Fale Conosco</h3>
-        <p><i class="fab fa-whatsapp"></i> 860404269 - Chamada e WhatsApp</p>
+        <p><i class="fab fa-whatsapp" style="color: #25D366;"></i> <strong>860404269</strong><br>Chamada e WhatsApp</p>
     </div>
+
+    <h2 style="text-align:center; text-transform:uppercase; letter-spacing:2px; margin-top:0;">Destaques</h2>
 
     <div class="grid-produtos">
         
         <div class="card-produto">
-            <img src="img/vestido-exemplo.jpg" alt="Vestido">
+            <img src="img/produto1.jpg" alt="Nome do Produto">
             <div class="card-info">
-                <h3>Vestido Elegance</h3>
-                <p>Tecido leve e corte moderno.</p>
-                <span class="preco">2.500 MT</span>
-                <button class="btn-carrinho" onclick="addItem('Vestido Elegance', 2500)">Na Carrinha <i class="fas fa-shopping-cart"></i></button>
+                <div>
+                    <h3>Nome do Produto</h3>
+                    <p>Descrição curta do produto.</p>
+                </div>
+                <div>
+                    <span class="preco">1.000 MT</span>
+                    <button class="btn-carrinho" onclick="addItem('Nome do Produto', 1000)">
+                        Na Carrinha <i class="fas fa-shopping-cart"></i>
+                    </button>
+                </div>
             </div>
         </div>
 
         <div class="card-produto">
-            <img src="img/cabelo-exemplo.jpg" alt="Cabelo">
+            <img src="img/produto2.jpg" alt="Nome do Produto">
             <div class="card-info">
-                <h3>Cabelo Brasileiro 20'</h3>
-                <p>100% Humano, cor natural.</p>
-                <span class="preco">12.000 MT</span>
-                <button class="btn-carrinho" onclick="addItem('Cabelo Brasileiro 20', 12000)">Na Carrinha <i class="fas fa-shopping-cart"></i></button>
+                <div>
+                    <h3>Nome do Produto</h3>
+                    <p>Descrição curta do produto.</p>
+                </div>
+                <div>
+                    <span class="preco">2.000 MT</span>
+                    <button class="btn-carrinho" onclick="addItem('Nome do Produto', 2000)">
+                        Na Carrinha <i class="fas fa-shopping-cart"></i>
+                    </button>
+                </div>
             </div>
         </div>
-
+        
         </div>
 </div>
 
 <div id="carrinho-secao">
-    <h3 style="margin-top:0"><i class="fas fa-shopping-bag"></i> Minha Carrinha</h3>
-    <ul id="itens-carrinho" style="list-style: none; padding: 0;">
-        </ul>
-    <div style="margin-top: 20px; border-top: 2px solid var(--dourado); padding-top: 10px;">
-        <p style="display: flex; justify-content: space-between; font-size: 1.2rem;">
-            <span>Total:</span>
-            <span id="total-val">0</span>
-        </p>
-        <button class="btn-carrinho" onclick="enviarWhatsApp()">
-            FINALIZAR COMPRA <i class="fab fa-whatsapp"></i>
-        </button>
+    <h3><i class="fas fa-shopping-bag"></i> Carrinha</h3>
+    <ul id="itens-carrinho" style="list-style: none; padding: 0;"></ul>
+    <div class="carrinho-total">
+        <span>Total:</span>
+        <span id="total-val">0 MT</span>
     </div>
+    <button class="btn-carrinho" style="margin-top: 15px;" onclick="enviarWhatsApp()">
+        FINALIZAR COMPRA <i class="fab fa-whatsapp"></i>
+    </button>
 </div>
 
 <footer>
@@ -254,14 +310,17 @@
     function toggleSecao(id) {
         const box = document.getElementById(id);
         const todas = document.querySelectorAll('.info-box');
-        todas.forEach(s => { if(s.id !== id) s.style.display = 'none'; }); // Fecha outras abertas
+        todas.forEach(s => { if(s.id !== id) s.style.display = 'none'; });
         box.style.display = (box.style.display === 'block') ? 'none' : 'block';
+        if(box.style.display === 'block') box.scrollIntoView({behavior: "smooth"});
     }
 
     function addItem(nome, preco) {
         carrinho.push({ nome, preco });
         valorTotal += preco;
         renderCarrinho();
+        // Mostra o carrinho ao adicionar primeiro item
+        document.getElementById('carrinho-secao').style.display = 'block';
     }
 
     function renderCarrinho() {
@@ -269,22 +328,19 @@
         const totalDisplay = document.getElementById('total-val');
         lista.innerHTML = '';
         
-        carrinho.forEach((item, index) => {
-            lista.innerHTML += `<li>${item.nome} <span>${item.preco} MT</span></li>`;
+        carrinho.forEach((item) => {
+            lista.innerHTML += `<li>${item.nome} <span>${item.preco.toLocaleString()} MT</span></li>`;
         });
         
         totalDisplay.innerHTML = valorTotal.toLocaleString() + " MT";
     }
 
     function enviarWhatsApp() {
-        if (carrinho.length === 0) {
-            alert("A carrinha está vazia!");
-            return;
-        }
+        if (carrinho.length === 0) return;
 
         const listaItens = carrinho.map(i => i.nome).join(', ');
-        const textoMsg = `Olá Muquilas Fashion! quero comprar os itens (${listaItens}) somando um total de ${valorTotal} MT.`;
-        const numeroWhats = "258860407269"; // Formato internacional Moçambique
+        const textoMsg = `Olá Muquilas Fashion! quero comprar os itens (${listaItens}) somando um total de ${valorTotal.toLocaleString()} MT.`;
+        const numeroWhats = "258860407269"; // Número de finalização
         
         const url = `https://wa.me/${numeroWhats}?text=${encodeURIComponent(textoMsg)}`;
         window.open(url, '_blank');
