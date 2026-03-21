@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="pt-mz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muquilas Fashion | Luxo e Estilo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --preto: #0a0a0a;
+            --dourado: #d4af37;
+            --dourado-claro: #f1d592;
+            --cinza-escuro: #1a1a1a;
+        }
+
+        body {
+            background-color: var(--preto);
+            color: var(--dourado);
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        /* Header e Navegação */
+        header {
+            border-bottom: 1px solid var(--dourado);
+            padding: 30px 20px;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            background: rgba(10, 10, 10, 0.95);
+            z-index: 100;
+        }
+
+        h1 { 
+            margin: 0; 
+            letter-spacing: 4px; 
+            text-transform: uppercase;
+            font-size: 2.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        nav { margin-top: 20px; }
+
+        .nav-btn {
+            background: transparent;
+            border: 1px solid var(--dourado);
+            color: var(--dourado);
+            padding: 10px 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 5px;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+        }
+
+        .nav-btn:hover {
+            background: var(--dourado);
+            color: var(--preto);
+            box-shadow: 0 0 10px var(--dourado);
+        }
+
+        /* Seções de Informação */
+        .container { padding: 40px 20px; max-width: 1200px; margin: auto; min-height: 70vh; }
+        
+        .info-box {
+            display: none;
+            padding: 30px;
+            border: 1px solid var(--dourado);
+            margin-bottom: 30px;
+            text-align: center;
+            background: var(--cinza-escuro);
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        /* Grid de Produtos */
+        .grid-produtos {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        /* Card de Produto - Só aparece se tiver conteúdo */
+        .card-produto {
+            background: var(--cinza-escuro);
+            border: 1px solid #333;
+            padding: 0;
+            text-align: center;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-produto:hover {
+            transform: translateY(-10px);
+            border-color: var(--dourado);
+        }
+
+        .card-produto img { 
+            width: 100%; 
+            height: 300px; 
+            object-fit: cover; 
+            border-bottom: 1px solid #333;
+        }
+
+        .card-info { padding: 20px; flex-grow: 1; }
+        
+        .card-info h3 { margin: 10px 0; font-size: 1.4rem; }
+        
+        .preco { 
+            font-weight: bold; 
+            font-size: 1.5rem; 
+            display: block; 
+            margin: 15px 0; 
+            color: #fff;
+        }
+
+        .btn-carrinho {
+            background: linear-gradient(45deg, var(--dourado), var(--dourado-claro));
+            color: var(--preto);
+            border: none;
+            padding: 15px;
+            width: 100%;
+            cursor: pointer;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: 0.3s;
+        }
+
+        .btn-carrinho:hover { filter: brightness(1.2); }
+
+        /* Carrinho Lateral Flutuante */
+        #carrinho-secao {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #000;
+            border: 2px solid var(--dourado);
+            padding: 20px;
+            width: 320px;
+            max-height: 500px;
+            overflow-y: auto;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            border-radius: 15px;
+            z-index: 1000;
+        }
+
+        #itens-carrinho li {
+            border-bottom: 1px solid #333;
+            padding: 10px 0;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* Selo e Rodapé */
+        footer {
+            text-align: center;
+            padding: 60px 20px;
+            background: #050505;
+        }
+
+        .selo { 
+            border: 1px solid var(--dourado); 
+            padding: 10px 20px; 
+            display: inline-block; 
+            letter-spacing: 1px;
+            font-weight: bold;
+        }
+
+        /* Responsividade para Celular */
+        @media (max-width: 600px) {
+            #carrinho-secao { width: 90%; right: 5%; }
+            h1 { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Muquilas Fashion</h1>
+    <nav>
+        <button class="nav-btn" onclick="toggleSecao('quem-somos')">Quem Somos</button>
+        <button class="nav-btn" onclick="toggleSecao('contato')">Contacto</button>
+    </nav>
+</header>
+
+<div class="container">
+    <div id="quem-somos" class="info-box">
+        <h3>Nossa Missão</h3>
+        <p>Muquilas fashion é uma equipa focada no seu bem estar, cuidando da sua aparência e autoestima, como vestir bem seguindo a moda e novas tendências.</p>
+    </div>
+
+    <div id="contato" class="info-box">
+        <h3>Fale Conosco</h3>
+        <p><i class="fab fa-whatsapp"></i> 860404269 - Chamada e WhatsApp</p>
+    </div>
+
+    <div class="grid-produtos">
+        
+        <div class="card-produto">
+            <img src="img/vestido-exemplo.jpg" alt="Vestido">
+            <div class="card-info">
+                <h3>Vestido Elegance</h3>
+                <p>Tecido leve e corte moderno.</p>
+                <span class="preco">2.500 MT</span>
+                <button class="btn-carrinho" onclick="addItem('Vestido Elegance', 2500)">Na Carrinha <i class="fas fa-shopping-cart"></i></button>
+            </div>
+        </div>
+
+        <div class="card-produto">
+            <img src="img/cabelo-exemplo.jpg" alt="Cabelo">
+            <div class="card-info">
+                <h3>Cabelo Brasileiro 20'</h3>
+                <p>100% Humano, cor natural.</p>
+                <span class="preco">12.000 MT</span>
+                <button class="btn-carrinho" onclick="addItem('Cabelo Brasileiro 20', 12000)">Na Carrinha <i class="fas fa-shopping-cart"></i></button>
+            </div>
+        </div>
+
+        </div>
+</div>
+
+<div id="carrinho-secao">
+    <h3 style="margin-top:0"><i class="fas fa-shopping-bag"></i> Minha Carrinha</h3>
+    <ul id="itens-carrinho" style="list-style: none; padding: 0;">
+        </ul>
+    <div style="margin-top: 20px; border-top: 2px solid var(--dourado); padding-top: 10px;">
+        <p style="display: flex; justify-content: space-between; font-size: 1.2rem;">
+            <span>Total:</span>
+            <span id="total-val">0</span>
+        </p>
+        <button class="btn-carrinho" onclick="enviarWhatsApp()">
+            FINALIZAR COMPRA <i class="fab fa-whatsapp"></i>
+        </button>
+    </div>
+</div>
+
+<footer>
+    <div class="selo">Empresa criada e certificada por MOZ1.VENDAS</div>
+</footer>
+
+<script>
+    let carrinho = [];
+    let valorTotal = 0;
+
+    function toggleSecao(id) {
+        const box = document.getElementById(id);
+        const todas = document.querySelectorAll('.info-box');
+        todas.forEach(s => { if(s.id !== id) s.style.display = 'none'; }); // Fecha outras abertas
+        box.style.display = (box.style.display === 'block') ? 'none' : 'block';
+    }
+
+    function addItem(nome, preco) {
+        carrinho.push({ nome, preco });
+        valorTotal += preco;
+        renderCarrinho();
+    }
+
+    function renderCarrinho() {
+        const lista = document.getElementById('itens-carrinho');
+        const totalDisplay = document.getElementById('total-val');
+        lista.innerHTML = '';
+        
+        carrinho.forEach((item, index) => {
+            lista.innerHTML += `<li>${item.nome} <span>${item.preco} MT</span></li>`;
+        });
+        
+        totalDisplay.innerHTML = valorTotal.toLocaleString() + " MT";
+    }
+
+    function enviarWhatsApp() {
+        if (carrinho.length === 0) {
+            alert("A carrinha está vazia!");
+            return;
+        }
+
+        const listaItens = carrinho.map(i => i.nome).join(', ');
+        const textoMsg = `Olá Muquilas Fashion! quero comprar os itens (${listaItens}) somando um total de ${valorTotal} MT.`;
+        const numeroWhats = "258860407269"; // Formato internacional Moçambique
+        
+        const url = `https://wa.me/${numeroWhats}?text=${encodeURIComponent(textoMsg)}`;
+        window.open(url, '_blank');
+    }
+</script>
+
+</body>
+</html>
