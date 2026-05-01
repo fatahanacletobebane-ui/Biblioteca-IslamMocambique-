@@ -6,7 +6,6 @@
     <title>Alcorão Sagrado - Islam Moçambique</title>
     <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Scheherazade+New:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
     <style>
         :root {
@@ -97,11 +96,13 @@
             color: var(--white); margin-top: 10px; box-shadow: 0 4px 15px rgba(201, 162, 39, 0.3);
         }
         .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(201, 162, 39, 0.4); }
+        .btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none !important; }
 
         .toggle-text { margin-top: 20px; font-size: 14px; color: var(--gray); }
         .toggle-text span { color: var(--primary); font-weight: 600; cursor: pointer; text-decoration: underline; }
         .error-msg { color: #c0392b; font-size: 13px; margin-top: 10px; display: none; padding: 10px; background: #fdeaea; border-radius: 8px; }
         .success-msg { color: var(--primary); font-size: 13px; margin-top: 10px; display: none; padding: 10px; background: #e8f5e9; border-radius: 8px; }
+        .debug-msg { color: var(--gray); font-size: 11px; margin-top: 8px; font-family: monospace; }
 
         .app-container { display: none; min-height: 100vh; }
         .app-container.active { display: block; }
@@ -366,7 +367,6 @@
         }
         .now-speaking-bar .stop-tts:hover { background: rgba(255,255,255,0.3); }
     </style>
-<base target="_blank">
 </head>
 <body>
 
@@ -386,8 +386,9 @@
                     <label>🔐 PIN (4 dígitos)</label>
                     <input type="password" id="loginPin" placeholder="****" maxlength="4">
                 </div>
-                <button class="btn btn-primary" onclick="login()">Entrar</button>
+                <button class="btn btn-primary" id="loginBtn" onclick="login()">Entrar</button>
                 <div class="error-msg" id="loginError"></div>
+                <div class="debug-msg" id="loginDebug"></div>
                 <div class="toggle-text">
                     Não tem conta? <span onclick="showRegister()">Registar-se</span>
                 </div>
@@ -414,7 +415,7 @@
                     <label>🔐 Confirmar PIN</label>
                     <input type="password" id="regPin2" placeholder="****" maxlength="4">
                 </div>
-                <button class="btn btn-gold" onclick="register()">Criar Conta</button>
+                <button class="btn btn-gold" id="regBtn" onclick="register()">Criar Conta</button>
                 <div class="error-msg" id="regError"></div>
                 <div class="success-msg" id="regSuccess"></div>
                 <div class="toggle-text">
@@ -497,7 +498,7 @@
                         </select>
                         <div class="speed-control">
                             <label>Velocidade:</label>
-                            <input type="range" id="ttsSpeed" min="0.5" max="2" step="0.1" value="1" oninput="updateSpeedDisplay()">
+                            <input type="range" id="ttsSpeed" min="0.5" max="2" step="0.1" value="1" onchange="updateSpeedDisplay()">
                             <span class="speed-value" id="speedValue">1.0x</span>
                         </div>
                         <button class="tts-btn" id="ttsPlayAllBtn" onclick="togglePlayAllTTS()">
@@ -562,33 +563,41 @@
             appId: "1:1097811611947:web:476c4b2e12fc4c6529756e"
         };
 
-        firebase.initializeApp(firebaseConfig);
-        const db = firebase.database();
-        const auth = firebase.auth();
+        // Initialize Firebase
+        var app, db;
+        try {
+            app = firebase.initializeApp(firebaseConfig);
+            db = firebase.database();
+            console.log("Firebase initialized successfully");
+        } catch(e) {
+            console.error("Firebase init error:", e);
+            alert("Erro ao inicializar Firebase: " + e.message);
+        }
 
         // ==================== STATE ====================
-        let currentUser = null;
-        let surahsData = [];
-        let currentSurah = null;
-        let currentReciter = 'ar.alafasy';
-        let audioElement = document.getElementById('audioPlayer');
-        let isPlaying = false;
-        let bookmarks = [];
-        let currentSurahVerses = [];
+        var currentUser = null;
+        var surahsData = [];
+        var currentSurah = null;
+        var currentReciter = 'ar.alafasy';
+        var audioElement = document.getElementById('audioPlayer');
+        var isPlaying = false;
+        var bookmarks = [];
+        var currentSurahVerses = [];
 
         // TTS State
-        let ttsUtterance = null;
-        let isSpeaking = false;
-        let isPlayingAll = false;
-        let currentTTSIndex = 0;
-        let ttsVoices = [];
-        let ttsRate = 1.0;
+        var ttsUtterance = null;
+        var isSpeaking = false;
+        var isPlayingAll = false;
+        var currentTTSIndex = 0;
+        var ttsVoices = [];
+        var ttsRate = 1.0;
 
         // ==================== AUTH ====================
         function showRegister() {
             document.getElementById('loginForm').style.display = 'none';
             document.getElementById('registerForm').style.display = 'block';
             document.getElementById('loginError').style.display = 'none';
+            document.getElementById('loginDebug').style.display = 'none';
         }
 
         function showLogin() {
@@ -598,46 +607,65 @@
         }
 
         function showError(id, msg) {
-            const el = document.getElementById(id);
+            var el = document.getElementById(id);
+            el.textContent = msg;
+            el.style.display = 'block';
+        }
+
+        function showDebug(msg) {
+            var el = document.getElementById('loginDebug');
             el.textContent = msg;
             el.style.display = 'block';
         }
 
         function hideErrors() {
             document.getElementById('loginError').style.display = 'none';
+            document.getElementById('loginDebug').style.display = 'none';
             document.getElementById('regError').style.display = 'none';
             document.getElementById('regSuccess').style.display = 'none';
         }
 
+        function setLoading(btnId, loading) {
+            var btn = document.getElementById(btnId);
+            if (btn) btn.disabled = loading;
+        }
+
         async function register() {
             hideErrors();
-            const name = document.getElementById('regName').value.trim();
-            const phone = document.getElementById('regPhone').value.trim();
-            const email = document.getElementById('regEmail').value.trim();
-            const pin = document.getElementById('regPin').value;
-            const pin2 = document.getElementById('regPin2').value;
+            setLoading('regBtn', true);
+            var name = document.getElementById('regName').value.trim();
+            var phone = document.getElementById('regPhone').value.trim();
+            var email = document.getElementById('regEmail').value.trim();
+            var pin = document.getElementById('regPin').value;
+            var pin2 = document.getElementById('regPin2').value;
 
             if (!name || !phone || !email || !pin) {
                 showError('regError', 'Preencha todos os campos!');
+                setLoading('regBtn', false);
                 return;
             }
             if (pin.length !== 4) {
                 showError('regError', 'O PIN deve ter 4 dígitos!');
+                setLoading('regBtn', false);
                 return;
             }
             if (pin !== pin2) {
                 showError('regError', 'Os PINs não coincidem!');
+                setLoading('regBtn', false);
                 return;
             }
 
             try {
-                const snapshot = await db.ref('users/' + phone).once('value');
+                console.log("Checking if phone exists:", phone);
+                var snapshot = await db.ref('users/' + phone).once('value');
+                console.log("Phone check result:", snapshot.exists());
                 if (snapshot.exists()) {
                     showError('regError', 'Este número já está registado!');
+                    setLoading('regBtn', false);
                     return;
                 }
 
-                const userData = {
+                var userData = {
                     name: name,
                     phone: phone,
                     email: email,
@@ -650,41 +678,59 @@
                     sellerBalance: 0
                 };
 
+                console.log("Saving user data...");
                 await db.ref('users/' + phone).set(userData);
+                console.log("User saved successfully");
                 document.getElementById('regSuccess').textContent = 'Conta criada com sucesso! Faça login.';
                 document.getElementById('regSuccess').style.display = 'block';
                 setTimeout(showLogin, 2000);
             } catch (e) {
+                console.error("Register error:", e);
                 showError('regError', 'Erro: ' + e.message);
+            } finally {
+                setLoading('regBtn', false);
             }
         }
 
         async function login() {
             hideErrors();
-            const phone = document.getElementById('loginPhone').value.trim();
-            const pin = document.getElementById('loginPin').value;
+            setLoading('loginBtn', true);
+            var phone = document.getElementById('loginPhone').value.trim();
+            var pin = document.getElementById('loginPin').value;
+
+            console.log("Login attempt - Phone:", phone, "PIN:", pin);
 
             if (!phone || !pin) {
                 showError('loginError', 'Preencha telefone e PIN!');
+                setLoading('loginBtn', false);
                 return;
             }
 
             try {
-                const snapshot = await db.ref('users/' + phone).once('value');
-                const userData = snapshot.val();
+                console.log("Fetching user from DB:", 'users/' + phone);
+                showDebug('A conectar ao Firebase...');
+                var snapshot = await db.ref('users/' + phone).once('value');
+                console.log("DB response received");
+                showDebug('Dados recebidos do servidor');
+
+                var userData = snapshot.val();
+                console.log("User data:", userData);
 
                 if (!userData) {
-                    showError('loginError', 'Utilizador não encontrado!');
+                    showError('loginError', 'Utilizador não encontrado! Registe-se primeiro.');
+                    setLoading('loginBtn', false);
                     return;
                 }
 
                 if (userData.pin !== pin) {
                     showError('loginError', 'PIN incorreto!');
+                    setLoading('loginBtn', false);
                     return;
                 }
 
                 if (userData.approved === false) {
                     showError('loginError', 'Conta pendente de aprovação pelo administrador.');
+                    setLoading('loginBtn', false);
                     return;
                 }
 
@@ -693,7 +739,11 @@
                 showToast('Bem-vindo, ' + userData.name + '! 🕌');
                 enterApp();
             } catch (e) {
-                showError('loginError', 'Erro: ' + e.message);
+                console.error("Login error:", e);
+                showError('loginError', 'Erro de conexão: ' + e.message);
+                showDebug('Erro: ' + e.message);
+            } finally {
+                setLoading('loginBtn', false);
             }
         }
 
@@ -715,29 +765,48 @@
             initTTS();
         }
 
-        window.addEventListener('load', () => {
-            const saved = localStorage.getItem('quranUser');
+        // Auto-login on page load
+        window.addEventListener('load', function() {
+            console.log("Page loaded, checking auto-login...");
+            var saved = localStorage.getItem('quranUser');
             if (saved) {
-                const data = JSON.parse(saved);
-                db.ref('users/' + data.phone).once('value').then(snap => {
-                    if (snap.exists()) {
-                        currentUser = snap.val();
-                        enterApp();
-                    }
-                });
+                try {
+                    var data = JSON.parse(saved);
+                    console.log("Auto-login for phone:", data.phone);
+                    db.ref('users/' + data.phone).once('value').then(function(snap) {
+                        if (snap.exists()) {
+                            currentUser = snap.val();
+                            console.log("Auto-login successful");
+                            enterApp();
+                        } else {
+                            console.log("Saved user not found in DB");
+                            localStorage.removeItem('quranUser');
+                        }
+                    }).catch(function(e) {
+                        console.error("Auto-login error:", e);
+                        localStorage.removeItem('quranUser');
+                    });
+                } catch(e) {
+                    console.error("Auto-login parse error:", e);
+                    localStorage.removeItem('quranUser');
+                }
+            } else {
+                console.log("No saved login found");
             }
         });
 
         // ==================== TTS ====================
         function initTTS() {
-            const voiceSelect = document.getElementById('ttsVoiceSelect');
+            var voiceSelect = document.getElementById('ttsVoiceSelect');
 
             function populateVoices() {
-                ttsVoices = speechSynthesis.getVoices().filter(v => v.lang.startsWith('pt'));
+                ttsVoices = speechSynthesis.getVoices().filter(function(v) {
+                    return v.lang.indexOf('pt') === 0;
+                });
                 voiceSelect.innerHTML = '<option value="">Voz padrão do sistema</option>';
 
-                ttsVoices.forEach((voice, i) => {
-                    const option = document.createElement('option');
+                ttsVoices.forEach(function(voice, i) {
+                    var option = document.createElement('option');
                     option.value = i;
                     option.textContent = voice.name + ' (' + voice.lang + ')';
                     voiceSelect.appendChild(option);
@@ -769,7 +838,7 @@
             ttsUtterance.pitch = 1;
             ttsUtterance.volume = 1;
 
-            const voiceIndex = document.getElementById('ttsVoiceSelect').value;
+            var voiceIndex = document.getElementById('ttsVoiceSelect').value;
             if (voiceIndex !== '' && ttsVoices[voiceIndex]) {
                 ttsUtterance.voice = ttsVoices[voiceIndex];
             }
@@ -796,7 +865,7 @@
         }
 
         function updateSpeakingUI(speaking) {
-            const bar = document.getElementById('nowSpeakingBar');
+            var bar = document.getElementById('nowSpeakingBar');
             if (speaking) {
                 bar.classList.add('active');
                 document.getElementById('ttsStopBtn').style.display = 'inline-flex';
@@ -866,7 +935,6 @@
             }
 
             var verse = currentSurahVerses[currentTTSIndex];
-            // ONLY read the translation text - the actual Portuguese meaning
             var text = verse.translation;
 
             document.getElementById('speakingText').textContent =
@@ -887,14 +955,11 @@
                 return;
             }
 
-            // ONLY read the translation text - the actual Portuguese meaning
             var text = verse.translation;
-
             isPlayingAll = false;
             currentTTSIndex = currentSurahVerses.indexOf(verse);
 
-            document.getElementById('speakingText').textContent =
-                'A ler o significado do versículo ' + verse.number;
+            document.getElementById('speakingText').textContent = 'A ler o significado do versículo ' + verse.number;
 
             speakText(text, function() {
                 updateSpeakingUI(false);
@@ -915,8 +980,8 @@
         // ==================== QURAN DATA ====================
         async function loadSurahs() {
             try {
-                const res = await fetch('https://api.alquran.cloud/v1/surah');
-                const data = await res.json();
+                var res = await fetch('https://api.alquran.cloud/v1/surah');
+                var data = await res.json();
                 surahsData = data.data;
                 renderSurahs(surahsData);
             } catch (e) {
@@ -925,7 +990,7 @@
         }
 
         function renderSurahs(surahs) {
-            const grid = document.getElementById('surahGrid');
+            var grid = document.getElementById('surahGrid');
             grid.innerHTML = surahs.map(function(s) {
                 return '<div class="surah-card" onclick="openSurah(' + s.number + ')">' +
                     '<div class="number">' + s.number + '</div>' +
@@ -940,8 +1005,8 @@
         }
 
         function searchSurahs() {
-            const term = document.getElementById('searchInput').value.toLowerCase();
-            const filtered = surahsData.filter(function(s) {
+            var term = document.getElementById('searchInput').value.toLowerCase();
+            var filtered = surahsData.filter(function(s) {
                 return s.englishName.toLowerCase().includes(term) ||
                        s.englishNameTranslation.toLowerCase().includes(term) ||
                        s.number.toString().includes(term);
@@ -957,21 +1022,21 @@
             document.getElementById('surahDetailView').classList.add('active');
             document.getElementById('bookmarksView').style.display = 'none';
 
-            const surah = surahsData.find(function(s) { return s.number === number; });
+            var surah = surahsData.find(function(s) { return s.number === number; });
             document.getElementById('detailTitle').textContent = surah.number + '. ' + surah.englishName + ' - ' + surah.englishNameTranslation;
             document.getElementById('detailInfo').innerHTML =
                 '<span>' + (surah.revelationType === 'Meccan' ? '📍 Revelada em Meca' : '📍 Revelada em Medina') + '</span>' +
                 '<span>📜 ' + surah.numberOfAyahs + ' versículos</span>';
 
-            const container = document.getElementById('versesContainer');
+            var container = document.getElementById('versesContainer');
             container.innerHTML = '<div class="loading"><div class="loading-spinner"></div><p>A carregar versículos...</p></div>';
 
             try {
-                const arabicRes = await fetch('https://api.alquran.cloud/v1/surah/' + number);
-                const arabicData = await arabicRes.json();
+                var arabicRes = await fetch('https://api.alquran.cloud/v1/surah/' + number);
+                var arabicData = await arabicRes.json();
 
-                const ptRes = await fetch('https://api.alquran.cloud/v1/surah/' + number + '/pt');
-                const ptData = await ptRes.json();
+                var ptRes = await fetch('https://api.alquran.cloud/v1/surah/' + number + '/pt');
+                var ptData = await ptRes.json();
 
                 currentSurahVerses = arabicData.data.ayahs.map(function(ayah, i) {
                     var ptText = '';
@@ -995,7 +1060,7 @@
         }
 
         function renderVerses(verses) {
-            const container = document.getElementById('versesContainer');
+            var container = document.getElementById('versesContainer');
             container.innerHTML = verses.map(function(v) {
                 var isBookmarked = bookmarks.some(function(b) {
                     return b.surah === currentSurah && b.verse === v.number;
@@ -1010,10 +1075,10 @@
                         '<button class="verse-action-btn tts-btn-verse" id="tts-btn-' + v.number + '" onclick="speakSingleVerse(' + v.number + ')">' +
                             '🔊 Ouvir Significado' +
                         '</button>' +
-                        '<button class="verse-action-btn" onclick="toggleBookmark(' + currentSurah + ', ' + v.number + ', '' + safeArabic + '', '' + safeTranslation + '')">' +
+                        '<button class="verse-action-btn" onclick="toggleBookmark(' + currentSurah + ', ' + v.number + ', \'' + safeArabic + '\', \'' + safeTranslation + '\')">' +
                             (isBookmarked ? '❤️ Favorito' : '🤍 Favoritar') +
                         '</button>' +
-                        '<button class="verse-action-btn" onclick="copyVerse('' + safeArabic + '', '' + safeTranslation + '')">' +
+                        '<button class="verse-action-btn" onclick="copyVerse(\'' + safeArabic + '\', \'' + safeTranslation + '\')">' +
                             '📋 Copiar' +
                         '</button>' +
                     '</div>' +
@@ -1023,7 +1088,7 @@
 
         // ==================== AUDIO ====================
         function setupAudio(surahNumber) {
-            const audioUrl = 'https://cdn.islamic.network/quran/audio-surah/128/' + currentReciter + '/' + surahNumber + '.mp3';
+            var audioUrl = 'https://cdn.islamic.network/quran/audio-surah/128/' + currentReciter + '/' + surahNumber + '.mp3';
             audioElement.src = audioUrl;
             audioElement.load();
 
@@ -1056,32 +1121,37 @@
         }
 
         function updateProgress() {
-            const progress = (audioElement.currentTime / audioElement.duration) * 100;
+            var progress = (audioElement.currentTime / audioElement.duration) * 100;
             document.getElementById('progressBar').value = progress || 0;
 
-            const current = formatTime(audioElement.currentTime);
-            const total = formatTime(audioElement.duration || 0);
+            var current = formatTime(audioElement.currentTime);
+            var total = formatTime(audioElement.duration || 0);
             document.getElementById('timeDisplay').textContent = current + ' / ' + total;
         }
 
         function seekAudio() {
-            const progress = document.getElementById('progressBar').value;
+            var progress = document.getElementById('progressBar').value;
             audioElement.currentTime = (progress / 100) * audioElement.duration;
         }
 
         function formatTime(seconds) {
             if (isNaN(seconds)) return '0:00';
-            const m = Math.floor(seconds / 60);
-            const s = Math.floor(seconds % 60);
+            var m = Math.floor(seconds / 60);
+            var s = Math.floor(seconds % 60);
             return m + ':' + s.toString().padStart(2, '0');
         }
 
         // ==================== BOOKMARKS ====================
         async function loadBookmarks() {
             if (!currentUser) return;
-            const phone = currentUser.phone || JSON.parse(localStorage.getItem('quranUser')).phone;
-            const snap = await db.ref('quran_bookmarks/' + phone).once('value');
-            bookmarks = snap.val() ? Object.values(snap.val()) : [];
+            var phone = currentUser.phone;
+            try {
+                var snap = await db.ref('quran_bookmarks/' + phone).once('value');
+                bookmarks = snap.val() ? Object.values(snap.val()) : [];
+            } catch(e) {
+                console.error("Load bookmarks error:", e);
+                bookmarks = [];
+            }
         }
 
         async function toggleBookmark(surah, verse, arabic, translation) {
@@ -1090,9 +1160,9 @@
                 return;
             }
 
-            const phone = currentUser.phone;
-            const key = surah + '_' + verse;
-            const existing = bookmarks.find(function(b) {
+            var phone = currentUser.phone;
+            var key = surah + '_' + verse;
+            var existing = bookmarks.find(function(b) {
                 return b.surah === surah && b.verse === verse;
             });
 
@@ -1103,7 +1173,7 @@
                 });
                 showToast('Removido dos favoritos 💔');
             } else {
-                const bookmark = {
+                var bookmark = {
                     surah: surah,
                     verse: verse,
                     arabic: arabic,
@@ -1131,7 +1201,7 @@
             document.getElementById('bookmarksView').style.display = 'block';
 
             await loadBookmarks();
-            const container = document.getElementById('bookmarksContainer');
+            var container = document.getElementById('bookmarksContainer');
 
             if (bookmarks.length === 0) {
                 container.innerHTML = '<p style="text-align:center; padding:40px; color:var(--gray);">Nenhum favorito ainda. Clique no 🤍 ao lado de um versículo para favoritar!</p>';
@@ -1150,13 +1220,13 @@
                     '<div class="verse-arabic">' + b.arabic + '</div>' +
                     '<div class="verse-translation">' + b.translation + '</div>' +
                     '<div class="verse-actions">' +
-                        '<button class="verse-action-btn tts-btn-verse" onclick="openSurah(' + b.surah + '); setTimeout(function() { speakSingleVerse(' + b.verse + '); document.getElementById('verse-' + b.verse + '').scrollIntoView({behavior:'smooth'}); }, 800)">' +
+                        '<button class="verse-action-btn tts-btn-verse" onclick="openSurah(' + b.surah + '); setTimeout(function() { speakSingleVerse(' + b.verse + '); var el = document.getElementById(\\'verse-' + b.verse + '\\'); if(el) el.scrollIntoView({behavior:\\'smooth\\'}); }, 800)">' +
                             '🔊 Ouvir Significado' +
                         '</button>' +
-                        '<button class="verse-action-btn" onclick="openSurah(' + b.surah + '); setTimeout(function() { document.getElementById('verse-' + b.verse + '').scrollIntoView({behavior:'smooth'}); }, 500)">' +
+                        '<button class="verse-action-btn" onclick="openSurah(' + b.surah + '); setTimeout(function() { var el = document.getElementById(\\'verse-' + b.verse + '\\'); if(el) el.scrollIntoView({behavior:\\'smooth\\'}); }, 500)">' +
                             '📖 Ver no Contexto' +
                         '</button>' +
-                        '<button class="verse-action-btn" onclick="toggleBookmark(' + b.surah + ', ' + b.verse + ', '' + safeArabic + '', '' + safeTranslation + '')">' +
+                        '<button class="verse-action-btn" onclick="toggleBookmark(' + b.surah + ', ' + b.verse + ', \'' + safeArabic + '\', \'' + safeTranslation + '\')">' +
                             '❤️ Remover' +
                         '</button>' +
                     '</div>' +
@@ -1176,18 +1246,14 @@
 
         // ==================== UTILS ====================
         function copyVerse(arabic, translation) {
-            const text = arabic + '
-
-' + translation + '
-
-- Alcorão Sagrado (Islam Moçambique)';
+            var text = arabic + '\n\n' + translation + '\n\n- Alcorão Sagrado (Islam Moçambique)';
             navigator.clipboard.writeText(text).then(function() {
                 showToast('Versículo copiado! 📋');
             });
         }
 
         function showToast(msg) {
-            const toast = document.getElementById('toast');
+            var toast = document.getElementById('toast');
             toast.textContent = msg;
             toast.classList.add('show');
             setTimeout(function() { toast.classList.remove('show'); }, 3000);
