@@ -1,0 +1,71 @@
+{
+  "33": {
+    "title": "Livro do Bem Perdido (Al-Luqata)",
+    "arabic": "كتاب اللقطة",
+    "hadiths": [
+      {
+        "chapter": "Prova do dono",
+        "arabic": "حَدَّثَنَا آدَمُ، حَدَّثَنَا شُعْبَةُ، وَحَدَّثَنِي مُحَمَّدُ بْنُ بَشَّارٍ، حَدَّثَنَا غُنْدَرٌ، حَدَّثَنَا شُعْبَةُ، عَنْ سَلَمَةَ، سَمِعْتُ سُوَيْدَ بْنَ غَفَلَةَ، قَالَ لَقِيتُ أُبَىَّ بْنَ كَعْبٍ ـ رضى الله عنه ـ فَقَالَ أَخَذْتُ صُرَّةً مِائَةَ دِينَارٍ فَأَتَيْتُ النَّبِيَّ صلى الله عليه وسلم فَقَالَ \"عَرِّفْهَا حَوْلاً\". فَعَرَّفْتُهَا حَوْلَهَا فَلَمْ أَجِدْ مَنْ يَعْرِفُهَا، ثُمَّ أَتَيْتُهُ فَقَالَ \"عَرِّفْهَا حَوْلاً\" فَعَرَّفْتُهَا فَلَمْ أَجِدْ، ثُمَّ أَتَيْتُهُ ثَلاَثًا فَقَالَ \"احْفَظْ وِعَاءَهَا وَعَدَدَهَا وَوِكَاءَهَا، فَإِنْ جَاءَ صَاحِبُهَا، وَإِلاَّ فَاسْتَمْتِعْ بِهَا\"",
+        "portuguese": "Narrado por Ubai bin Ka'b: Encontrei uma bolsa contendo cem dinares. Então fui ao Profeta (ﷺ) e informei-o sobre isso. Ele disse: 'Faça anúncio público sobre ela por um ano.' Eu o fiz, mas ninguém apareceu para reivindicá-la. Então fui ao Profeta novamente e ele disse: 'Faça anúncio público por mais um ano.' Eu o fiz, mas ninguém apareceu. Fui a ele pela terceira vez e ele disse: 'Guarde o recipiente e a corda que é usada para amarrá-la e conte o dinheiro que contém. Se o dono vier, dê-a a ele; caso contrário, utilize-a.'",
+        "narrator": "Ubai bin Ka'b",
+        "reference": "Sahih al-Bukhari 2426 - Livro 45, Hadith 1"
+      },
+      {
+        "chapter": "Camelos perdidos",
+        "arabic": "حَدَّثَنَا عَمْرُو بْنُ عَبَّاسٍ، حَدَّثَنَا عَبْدُ الرَّحْمَنِ، حَدَّثَنَا سُفْيَانُ، عَنْ رَبِيعَةَ، حَدَّثَنِي يَزِيدُ، مَوْلَى الْمُنْبَعِثِ عَنْ زَيْدِ بْنِ خَالِدٍ الْجُهَنِيِّ ـ رضى الله عنه ـ قَالَ جَاءَ أَعْرَابِيٌّ النَّبِيَّ صلى الله عليه وسلم فَسَأَلَهُ عَمَّا يَلْتَقِطُهُ فَقَالَ \"عَرِّفْهَا سَنَةً، ثُمَّ احْفَظْ عِفَاصَهَا وَوِكَاءَهَا، فَإِنْ جَاءَ أَحَدٌ يُخْبِرُكَ بِهَا، وَإِلاَّ فَاسْتَنْفِقْهَا\". قَالَ يَا رَسُولَ اللَّهِ فَضَالَّةُ الْغَنَمِ قَالَ \"لَكَ أَوْ لأَخِيكَ أَوْ لِلذِّئْبِ\". قَالَ ضَالَّةُ الإِبِلِ فَتَمَعَّرَ وَجْهُ النَّبِيِّ صلى الله عليه وسلم. فَقَالَ \"مَا لَكَ وَلَهَا، مَعَهَا حِذَاؤُهَا وَسِقَاؤُهَا، تَرِدُ الْمَاءَ وَتَأْكُلُ الشَّجَرَ\"",
+        "portuguese": "Narrado por Zaid bin Khalid: Um beduíno foi ao Profeta (ﷺ) e perguntou sobre pegar algo perdido. O Profeta disse: 'Anuncie-o publicamente por um ano. Guarde sua descrição e a corda com que está amarrado. Se alguém vier e reivindicá-lo, dê-lhe; caso contrário, gaste-o.' O beduíno perguntou: 'E a ovelha perdida?' O Profeta disse: 'É para você, para seu irmão, ou para o lobo.' O beduíno perguntou: 'E o camelo perdido?' O rosto do Profeta ficou sério e disse: 'Você não tem nada a ver com ele. Ele tem seus pés e seu recipiente de água, e chegará à água e comerá árvores.'",
+        "narrator": "Zaid bin Khalid",
+        "reference": "Sahih al-Bukhari 2427 - Livro 45, Hadith 2"
+      },
+      {
+        "chapter": "Ovelhas perdidas",
+        "arabic": "حَدَّثَنَا إِسْمَاعِيلُ بْنُ عَبْدِ اللَّهِ، قَالَ حَدَّثَنِي سُلَيْمَانُ، عَنْ يَحْيَى، عَنْ يَزِيدَ، مَوْلَى الْمُنْبَعِثِ أَنَّهُ سَمِعَ زَيْدَ بْنَ خَالِدٍ ـ رضى الله عنه ـ يَقُولُ سُئِلَ النَّبِيُّ صلى الله عليه وسلم عَنِ اللُّقَطَةِ فَزَعَمَ أَنَّهُ قَالَ \"اعْرِفْ عِفَاصَهَا وَوِكَاءَهَا، ثُمَّ عَرِّفْهَا سَنَةً\". يَقُولُ يَزِيدُ إِنْ لَمْ تُعْتَرَفِ اسْتَنْفَقْ بِهَا صَاحِبُهَا وَكَانَتْ وَدِيعَةً، عِنْدَهُ. قَالَ يَحْيَى فَهَذَا الَّذِي لاَ أَدْرِي أَفِي حَدِيثِ رَسُولِ اللَّهِ صلى الله عليه وسلم هُوَ أَمْ شَىْءٌ مِنْ عِنْدِهِ ـ ثُمَّ قَالَ كَيْفَ تَرَى فِي ضَالَّةِ الْغَنَمِ قَالَ النَّبِيُّ صلى الله عليه وسلم \"خُذْهَا فَإِنَّمَا هِيَ لَكَ أَوْ لأَخِيكَ أَوْ لِلذِّئْبِ\"",
+        "portuguese": "Narrado por Zaid bin Khalid: O Profeta (ﷺ) foi perguntado sobre o bem perdido (Al-Luqata). Ele disse: 'Conheça sua descrição e a corda com que está amarrado, então anuncie-o publicamente por um ano.' Yazid acrescentou: 'Se não for reivindicado, seu dono pode gastá-lo, e será um depósito confiado a ele.' Quanto à ovelha perdida, o Profeta disse: 'Pegue-a, pois ela é para você, para seu irmão (ou seja, seu dono), ou para o lobo.'",
+        "narrator": "Zaid bin Khalid",
+        "reference": "Sahih al-Bukhari 2428 - Livro 45, Hadith 3"
+      },
+      {
+        "chapter": "Se o dono não é encontrado após um ano",
+        "arabic": "حَدَّثَنَا عَبْدُ اللَّهِ بْنُ يُوسُفَ، أَخْبَرَنَا مَالِكٌ، عَنْ رَبِيعَةَ بْنِ أَبِي عَبْدِ الرَّحْمَنِ، عَنْ يَزِيدَ، مَوْلَى الْمُنْبَعِثِ عَنْ زَيْدِ بْنِ خَالِدٍ ـ رضى الله عنه ـ قَالَ جَاءَ رَجُلٌ إِلَى رَسُولِ اللَّهِ صلى الله عليه وسلم فَسَأَلَهُ عَنِ اللُّقَطَةِ. فَقَالَ \"اعْرِفْ عِفَاصَهَا وَوِكَاءَهَا، ثُمَّ عَرِّفْهَا سَنَةً، فَإِنْ جَاءَ صَاحِبُهَا، وَإِلاَّ فَشَأْنَكَ بِهَا\". قَالُوا يَا رَسُولَ اللَّهِ فَضَالَّةُ الْغَنَمِ قَالَ \"هِيَ لَكَ أَوْ لأَخِيكَ أَوْ لِلذِّئْبِ\". قَالَ يَا رَسُولَ اللَّهِ، فَضَالَّةُ الإِبِلِ قَالَ \"مَا لَكَ وَلَهَا، مَعَهَا سِقَاؤُهَا وَحِذَاؤُهَا، تَرِدُ الْمَاءَ وَتَأْكُلُ الشَّجَرَ، حَتَّى يَلْقَاهَا رَبُّهَا\"",
+        "portuguese": "Narrado por Zaid bin Khalid: Um homem veio ao Mensageiro de Allah (ﷺ) e perguntou sobre o bem perdido. O Profeta disse: 'Conheça sua descrição e a corda com que está amarrado, então anuncie-o publicamente por um ano. Se o dono aparecer, dê-lhe; caso contrário, faça o que quiser com ele.' Quanto à ovelha perdida, ele disse: 'É para você, para seu irmão, ou para o lobo.' Quanto ao camelo perdido, ele disse: 'Você não tem nada a ver com ele. Ele tem seus pés, seu recipiente de água, e chegará à água e comerá árvores até que seu dono o encontre.'",
+        "narrator": "Zaid bin Khalid",
+        "reference": "Sahih al-Bukhari 2429 - Livro 45, Hadith 4"
+      },
+      {
+        "chapter": "Encontrar algo no mar",
+        "arabic": "وَقَالَ اللَّيْثُ حَدَّثَنِي جَعْفَرُ بْنُ رَبِيعَةَ، عَنْ عَبْدِ الرَّحْمَنِ بْنِ هُرْمُزَ، عَنْ أَبِي هُرَيْرَةَ ـ رضى الله عنه ـ عَنْ رَسُولِ اللَّهِ صلى الله عليه وسلم أَنَّهُ ذَكَرَ رَجُلاً مِنْ بَنِي إِسْرَائِيلَ ـ وَسَاقَ الْحَدِيثَ ـ \"فَخَرَجَ يَنْظُرُ لَعَلَّ مَرْكَبًا قَدْ جَاءَ بِمَالِهِ، فَإِذَا هُوَ بِالْخَشَبَةِ فَأَخَذَهَا لأَهْلِهِ حَطَبًا، فَلَمَّا نَشَرَهَا وَجَدَ الْمَالَ وَالصَّحِيفَةَ\"",
+        "portuguese": "Narrado por Abu Huraira: O Mensageiro de Allah (ﷺ) mencionou um homem dos filhos de Israel. O homem saiu ao mar esperando que um barco trouxesse seu dinheiro. De repente, viu um pedaço de madeira e o pegou para sua família como lenha. Quando o cortou, encontrou seu dinheiro e uma carta dentro dele.",
+        "narrator": "Abu Huraira",
+        "reference": "Sahih al-Bukhari 2430 - Livro 45, Hadith 5"
+      },
+      {
+        "chapter": "Encontrar uma tâmara no caminho",
+        "arabic": "حَدَّثَنَا عَبْدُ اللَّهِ بْنُ مُحَمَّدٍ، حَدَّثَنَا ابْنُ عُيَيْنَةَ، عَنِ ابْنِ جُرَيْجٍ، عَنْ عَطَاءٍ، سَمِعَ جَابِرَ بْنَ عَبْدِ اللَّهِ ـ رضى الله عنهما ـ نَهَى النَّبِيُّ صلى الله عليه وسلم عَنِ الْمُخَابَرَةِ، وَالْمُحَاقَلَةِ، وَعَنِ الْمُزَابَنَةِ، وَعَنْ بَيْعِ الثَّمَرِ حَتَّى يَبْدُوَ صَلاَحُهَا، وَأَنْ لاَ تُبَاعَ إِلاَّ بِالدِّينَارِ وَالدِّرْهَمِ، إِلاَّ الْعَرَايَا",
+        "portuguese": "Narrado por Jabir bin Abdullah: O Profeta (ﷺ) proibiu as vendas chamadas Al-Mukhabara, Al-Muhaqala e Al-Muzabana, e a venda de frutas até que se tornem livres de pragas. Ele proibiu a venda das frutas exceto por dinheiro, exceto as 'Araya (palmeiras cujas tâmaras são vendidas por tâmaras maduras estimadas).",
+        "narrator": "Jabir bin Abdullah",
+        "reference": "Sahih al-Bukhari 2381 - Livro 42, Hadith 29"
+      },
+      {
+        "chapter": "Anunciar o bem perdido em Meca",
+        "arabic": "وَقَالَ طَاوُسٌ عَنِ ابْنِ عَبَّاسٍ رَضِيَ اللَّهُ عَنْهُمَا عَنِ النَّبِيِّ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ قَالَ: «لاَ يَلْتَقِطُ لُقَطَتَهَا إِلاَّ مَنْ عَرَّفَهَا». وَقَالَ خَالِدٌ عَنْ عِكْرِمَةَ عَنْ ابْنِ عَبَّاسٍ عَنِ النَّبِيِّ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ قَالَ: «لاَ تُلْتَقَطُ لُقَطَتُهَا إِلاَّ لِمُعَرِّفٍ»",
+        "portuguese": "Narrado por Ibn Abbas: O Profeta (ﷺ) disse: 'Ninguém deve pegar o bem perdido de Meca exceto aquele que o anuncia publicamente.' Em outra narração: 'O bem perdido de Meca não deve ser pego exceto por quem o anuncia publicamente.'",
+        "narrator": "Ibn Abbas",
+        "reference": "Sahih al-Bukhari 2433 - Livro 45, Hadith 8"
+      },
+      {
+        "chapter": "Não ordenhar animais sem permissão",
+        "arabic": "حَدَّثَنَا عَبْدُ اللَّهِ بْنُ يُوسُفَ، أَخْرَنَا مَالِكٌ، عَنْ نَافِعٍ، عَنْ عَبْدِ اللَّهِ بْنِ كَعْبِ بْنِ مَالِكٍ، عَنْ كَعْبٍ ـ رضى الله عنه ـ أَنَّهُ تَقَاضَى ابْنَ أَبِي حَدْرَدٍ دَيْنًا كَانَ لَهُ عَلَيْهِ فِي الْمَسْجِدِ، فَارْتَفَعَتْ أَصْوَاتُهُمَا حَتَّى سَمِعَهَا رَسُولُ اللَّهِ صلى الله عليه وسلم وَهْوَ فِي بَيْتِهِ، فَخَرَجَ إِلَيْهِمَا، حَتَّى كَشَفَ سِجْفَ حُجْرَتِهِ فَنَادَى \"يَا كَعْبُ\". قَالَ لَبَّيْكَ يَا رَسُولَ اللَّهِ. قَالَ \"ضَعْ مِنْ دَيْنِكَ هَذَا\" فَأَوْمَأَ إِلَيْهِ، أَىِ الشَّطْرَ. قَالَ لَقَدْ فَعَلْتُ يَا رَسُولَ اللَّهِ. قَالَ \"قُمْ فَاقْضِهِ\"",
+        "portuguese": "Narrado por Abdullah bin Umar: O Mensageiro de Allah (ﷺ) disse: 'Ninguém deve ordenhar o animal de alguém sem sua permissão. Algum de vocês gostaria que alguém viesse à sua despensa, quebrasse seu recipiente e levasse sua comida? Os úberes dos animais são as despensas de seus donos onde sua provisão é guardada. Portanto, ninguém deve ordenhar o animal de outro sem a permissão de seu dono.'",
+        "narrator": "Abdullah bin Umar",
+        "reference": "Sahih al-Bukhari 2435 - Livro 45, Hadith 10"
+      },
+      {
+        "chapter": "Se o dono volta após um ano",
+        "arabic": "حَدَّثَنَا قُتَيْبَةُ بْنُ سَعِيدٍ، حَدَّثَنَا إِسْمَاعِيلُ بْنُ جَعْفَرٍ، عَنْ رَبِيعَةَ بْنِ أَبِي عَبْدِ الرَّحْمَنِ، عَنْ يَزِيدَ، مَوْلَى الْمُنْبَعِثِ عَنْ زَيْدِ بْنِ خَالِدٍ الْجُهَنِيِّ ـ رضى الله عنه ـ أَنَّ رَجُلاً سَأَلَ رَسُولَ اللَّهِ صلى الله عليه وسلم عَنِ اللُّقَطَةِ قَالَ \"عَرِّفْهَا سَنَةً، ثُمَّ اعْرِفْ وِكَاءَهَا وَعِفَاصَهَا، ثُمَّ اسْتَنْفِقْ بِهَا، فَإِنْ جَاءَ رَبُّهَا فَأَدِّهَا إِلَيْهِ\". قَالُوا يَا رَسُولَ اللَّهِ فَضَالَّةُ الْغَنَمِ قَالَ \"خُذْهَا فَإِنَّمَا هِيَ لَكَ أَوْ لأَخِيكَ أَوْ لِلذِّئْبِ\". قَالَ يَا رَسُولَ اللَّهِ، فَضَالَّةُ الإِبِلِ قَالَ فَغَضِبَ رَسُولُ اللَّهِ صلى الله عليه وسلم حَتَّى احْمَرَّتْ وَجْنَتَاهُ ـ أَوِ احْمَرَّ وَجْهُهُ ـ ثُمَّ قَالَ \"مَا لَكَ وَلَهَا، مَعَهَا حِذَاؤُهَا وَسِقَاؤُهَا، حَتَّى يَلْقَاهَا رَبُّهَا\"",
+        "portuguese": "Narrado por Zaid bin Khalid: Um homem perguntou ao Mensageiro de Allah (ﷺ) sobre o bem perdido. Ele disse: 'Anuncie-o publicamente por um ano, então conheça sua corda e seu recipiente, e gaste-o. Se o dono vier, devolva-lhe.' Eles perguntaram: 'Ó Mensageiro de Allah, e a ovelha perdida?' Ele disse: 'Pegue-a, pois ela é para você, para seu irmão, ou para o lobo.' O homem perguntou: 'E o camelo perdido?' O Profeta ficou irritado até que suas bochechas (ou rosto) ficaram vermelhas, e disse: 'Você não tem nada a ver com ele. Ele tem seus pés e seu recipiente de água, até que seu dono o encontre.'",
+        "narrator": "Zaid bin Khalid",
+        "reference": "Sahih al-Bukhari 2436 - Livro 45, Hadith 11"
+      }
+    ]
+  }
+}
